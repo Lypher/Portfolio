@@ -1,5 +1,7 @@
 import { BsGithub, BsLink } from 'react-icons/bs'
 import ProjectLink from '../../../ui-components/ProjectLink'
+import {useSelector, useDispatch} from "react-redux"
+import {getJobs, getProyects} from "../../../redux/actions"
 
 const Projects=[
   {
@@ -18,27 +20,44 @@ const Projects=[
   },
 
   {
-    name: 'Mala en la Cocina',
-    href: 'https://malaenlacocina.com',
-    photo: "https://media.licdn.com/dms/image/D4E2DAQEIi3Bu4FbUXw/profile-treasury-image-shrink_800_800/0/1683674130546?e=1687381200&v=beta&t=eWhA24vLtKi1Na1oa_G4hIr0G7oHwyUrloysL6EWZD0",
-    technlogies: "Wordpress, SQL, HTML, CSS",
+    name: 'Gaia Nutricion',
+    href: 'https://lypher.github.io/E-comerce/home.html',
+    photo: "https://media.licdn.com/dms/image/D4D2DAQHLzDW9Ir8jTQ/profile-treasury-image-shrink_800_800/0/1686827117078?e=1687449600&v=beta&t=lBdI2yLKSJeoQRQzhkvCR5vTX4a1djWPv6AlR4cB2Hs",
+    technlogies: "Javascript, HTML, CSS, LocalStorage, Boostrap",
     icon:<BsLink/>,
   }
 ]
 
+
 const ProjectsList=() => {
+  const proyectos = useSelector((state:any)=>state.proyects)
+  const experiencia = useSelector((state:any) => state.jobs)
+  const dispatch = useDispatch()
+
+
+let Desplegar = () => {
+  dispatch(getProyects(!proyectos))
+  experiencia == true? dispatch(getJobs(false)):""
+
+ 
+}
   return (
-    <div className="flex flex-col items-center gap-4">
-      {Projects.map(
-        (project) => <>
-          <img src={project.photo} alt={project.name} className='w-56 transform filter hover:scale-105 hover:border-2 hover:drop-shadow-sm border-white' />
-          <ProjectLink href={project.href} key={project.href}>
-            {project.name} {project.icon} 
-          </ProjectLink>
-          <p className='mb-10'>{project.technlogies}</p>
-         
-        </>
-      )}
+    <div >
+      <button onClick={Desplegar} className='text-xl hover:underline'>{proyectos == false?"Proyectos":"Ocultar"}</button>
+      {proyectos&&<div className="flex flex-col items-center gap-4">
+      {Projects.map((project, index) => (
+            <div
+              key={index}
+              className="w-56 transform filter hover:scale-105 hover:border-2 hover:drop-shadow-sm border-white animate-fadeIn"
+            >
+              <img src={project.photo} alt={project.name} />
+              <ProjectLink href={project.href}>
+                {project.name} {project.icon}
+              </ProjectLink>
+              <p className='mb-10'>{project.technlogies}</p>
+            </div>
+          ))}
+    </div>}
     </div>
   )
 }

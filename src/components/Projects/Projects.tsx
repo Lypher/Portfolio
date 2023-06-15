@@ -1,12 +1,13 @@
-import { BsGithub } from "react-icons/bs"
-import ProjectLink from "../../ui-components/ProjectLink"
 import ProjectsList from "./ProjectsList/ProjectsList"
+import Experience from "./Experience/Experience"
+import Curriculum from "./Curriculum/Curriculum"
 
 const Projects=() => {
   return (
     <div>
-      <h2 className='text-xl underline'>Proyectos:</h2>
+      <Curriculum />
       <ProjectsList />
+      <Experience />
     </div>
   )
 }

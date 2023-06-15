@@ -7,7 +7,7 @@ import Skills from "./components/Skills"
 function App() {
   return (
     <div className="bg-black text-white flex flex-col justify-center items-center gap-y-8">
-        <div className="flex flex-col">
+        <div className=" flex flex-col">
           <h1 className="text-6xl mx-auto mt-6">Enzo Acosta</h1>
             <h2 className="text-xl mx-auto">Programador Full-stack Jr</h2>
           </div>
